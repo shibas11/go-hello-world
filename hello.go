@@ -8,6 +8,7 @@ import (
 	"crypto/rsa"
 	"fmt"
 	"github.com/shibas11/go-hello-world/encryption"
+	"github.com/shibas11/go-hello-world/network/rpc"
 	"github.com/shibas11/go-hello-world/network/tcp"
 	"github.com/shibas11/go-hello-world/stringutil"
 )
@@ -26,8 +27,11 @@ func main() {
 	fmt.Println()
 	rsaSignAndVerifyTest()
 
+	//fmt.Println()
+	//tcpServerTest()
+
 	fmt.Println()
-	tcpServerTest()
+	rpcServerTest()
 
 	fmt.Print("Bye.")
 }
@@ -113,6 +117,14 @@ func rsaSignAndVerifyTest() {
 
 func tcpServerTest() {
 	server := tcp.NewServer(8080)
+	if err := server.Serve(); err != nil {
+		fmt.Println(err)
+		return
+	}
+}
+
+func rpcServerTest() {
+	server := rpc.NewServer(6000)
 	if err := server.Serve(); err != nil {
 		fmt.Println(err)
 		return
