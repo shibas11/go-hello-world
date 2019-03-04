@@ -7,6 +7,7 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"fmt"
+	"github.com/shibas11/go-hello-world/cmd"
 	"github.com/shibas11/go-hello-world/encryption"
 	"github.com/shibas11/go-hello-world/stringutil"
 )
@@ -25,6 +26,7 @@ func main() {
 	fmt.Println()
 	rsaSignAndVerifyTest()
 
+	cmd.Execute()
 }
 
 func symmetricTest(s string) {
