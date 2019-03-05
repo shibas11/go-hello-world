@@ -9,10 +9,12 @@ import (
 	"fmt"
 	"github.com/gogo/protobuf/proto"
 	"github.com/shibas11/go-hello-world/encryption"
+	"github.com/shibas11/go-hello-world/network/grpcTest"
 	"github.com/shibas11/go-hello-world/network/rpc"
 	"github.com/shibas11/go-hello-world/network/tcp"
 	pb "github.com/shibas11/go-hello-world/network/types"
 	"github.com/shibas11/go-hello-world/stringutil"
+	"log"
 )
 
 func main() {
@@ -37,6 +39,9 @@ func main() {
 
 	fmt.Println("\nprotobuf test")
 	protobufTest()
+
+	fmt.Println("\ngrpc test")
+	grpcAndProtobufTest()
 
 	fmt.Print("Bye.")
 }
@@ -162,4 +167,12 @@ func protobufTest() {
 	newBook := &pb.AddressBook{}
 	proto.Unmarshal(outBytes, newBook)
 	fmt.Println(newBook)
+}
+
+func grpcAndProtobufTest() {
+	server := grpcTest.NewServer(50051)
+	if err := server.Serve(); err != nil {
+		log.Fatalf("Failed to start server: " + err.Error())
+		return
+	}
 }
