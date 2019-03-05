@@ -7,10 +7,14 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"fmt"
+	"github.com/gogo/protobuf/proto"
 	"github.com/shibas11/go-hello-world/encryption"
+	"github.com/shibas11/go-hello-world/network/grpcTest"
 	"github.com/shibas11/go-hello-world/network/rpc"
 	"github.com/shibas11/go-hello-world/network/tcp"
+	pb "github.com/shibas11/go-hello-world/network/types"
 	"github.com/shibas11/go-hello-world/stringutil"
+	"log"
 )
 
 func main() {
@@ -30,8 +34,14 @@ func main() {
 	//fmt.Println()
 	//tcpServerTest()
 
-	fmt.Println()
-	rpcServerTest()
+	//fmt.Println()
+	//rpcServerTest()
+
+	fmt.Println("\nprotobuf test")
+	protobufTest()
+
+	fmt.Println("\ngrpc test")
+	grpcAndProtobufTest()
 
 	fmt.Print("Bye.")
 }
@@ -127,6 +137,42 @@ func rpcServerTest() {
 	server := rpc.NewServer(6000)
 	if err := server.Serve(); err != nil {
 		fmt.Println(err)
+		return
+	}
+}
+
+func protobufTest() {
+	p := pb.Person{
+		Name:  "Jake",
+		Id:    1,
+		Email: "abc@abc.com",
+		Phones: []*pb.Person_PhoneNumber{
+			{Number: "1234-5678", Type: pb.Person_MOBILE},
+		},
+	}
+
+	book := &pb.AddressBook{
+		People: []*pb.Person{
+			&p,
+		},
+	}
+
+	// Write the new address book back to disk.
+	outBytes, err := proto.Marshal(book)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	// Read the existing address book.
+	newBook := &pb.AddressBook{}
+	proto.Unmarshal(outBytes, newBook)
+	fmt.Println(newBook)
+}
+
+func grpcAndProtobufTest() {
+	server := grpcTest.NewServer(50051)
+	if err := server.Serve(); err != nil {
+		log.Fatalf("Failed to start server: " + err.Error())
 		return
 	}
 }
