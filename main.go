@@ -9,6 +9,9 @@ import (
 	"fmt"
 	"github.com/gogo/protobuf/proto"
 	"github.com/shibas11/go-hello-world/encryption"
+	"github.com/shibas11/go-hello-world/multiplexer/exam1"
+	"github.com/shibas11/go-hello-world/multiplexer/exam2"
+	"github.com/shibas11/go-hello-world/multiplexer/exam3"
 	"github.com/shibas11/go-hello-world/network/grpcTest"
 	"github.com/shibas11/go-hello-world/network/rpc"
 	"github.com/shibas11/go-hello-world/network/tcp"
@@ -18,6 +21,17 @@ import (
 )
 
 func main() {
+	// https://www.integralist.co.uk/posts/understanding-golangs-func-type/
+	examNumber := 3
+	switch examNumber {
+	case 1:
+		exam1.Exam()
+	case 2:
+		exam2.Exam()
+	case 3:
+		exam3.Exam()
+	}
+
 	s := "Hello, world."
 	fmt.Println(s)
 	fmt.Println(stringutil.Reverse(s))
