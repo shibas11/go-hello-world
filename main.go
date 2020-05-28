@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"github.com/gogo/protobuf/proto"
 	"github.com/shibas11/go-hello-world/encryption"
+	myio "github.com/shibas11/go-hello-world/io"
 	"github.com/shibas11/go-hello-world/multiplexer/exam1"
 	"github.com/shibas11/go-hello-world/multiplexer/exam2"
 	"github.com/shibas11/go-hello-world/multiplexer/exam3"
@@ -21,6 +22,9 @@ import (
 )
 
 func main() {
+	myio.BufIoTest()
+	return
+
 	// https://www.integralist.co.uk/posts/understanding-golangs-func-type/
 	examNumber := 3
 	switch examNumber {
