@@ -8,6 +8,7 @@ import (
 	"crypto/rsa"
 	"fmt"
 	"github.com/gogo/protobuf/proto"
+	"github.com/shibas11/go-hello-world/async"
 	"github.com/shibas11/go-hello-world/encryption"
 	myio "github.com/shibas11/go-hello-world/io"
 	"github.com/shibas11/go-hello-world/multiplexer/exam1"
@@ -22,8 +23,24 @@ import (
 )
 
 func main() {
-	myio.BufIoTest()
+	//async.Test01()
+	//async.Test02()
+	//async.Test03()
+	//async.Test04()
+	//async.Test05()
+	//async.Test06()
+	//async.Test07()
+	//async.Test08()
+	//async.Test09()
+	//async.Test10()
+	//async.Test11()
+	//async.Test12()
+	//async.Test13()
+	async.Test14()
+
 	return
+
+	myio.BufIoTest()
 
 	// https://www.integralist.co.uk/posts/understanding-golangs-func-type/
 	examNumber := 3
